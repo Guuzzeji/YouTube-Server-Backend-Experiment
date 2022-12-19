@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Dash.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/4.5.1/dash.all.min.js"
+        integrity="sha512-+7tpTNIPlORX24g9sEhW2a2G38Sl94zUNv3S+DCM+CkMrSNKXu0UwzJ69s85KGrIajxIJs7OAnfsl9twQaW2RQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.plyr.io/3.7.3/plyr.js"></script>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.3/plyr.css" />
+
+    <style>
+        video {
+            width: 50vw;
+            height: 50vh;
+        }
+
+        html,
+        body {
+            font-family: Arial;
+        }
+    </style>
+
+    <div>
+        <video autoplay style="--plyr-color-main: #FF0000" controls crossorigin playsinline></video>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // First real dialog starts around 1:47
+            const source = '/API/generateMPD=nm52GaVuvlw';
+            // For more dash options, see https://github.com/Dash-Industry-Forum/dash.js
+            const dash = dashjs.MediaPlayer().create();
+            const video = document.querySelector('video');
+            dash.initialize(video, source, true);
+
+            // Update caption tracks after initializing Plyr to get the generated captions
+            // For more options see: https://github.com/sampotts/plyr/#options
+            const player = new Plyr(video, {
+                captions: {
+                    active: true,
+                    update: true
+                },
+                settings: ['captions', 'quality', 'speed', 'loop'],
+                quality: { default: 720, options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240] }
+            });
+
+            // Expose player and dash so they can be used from the console
+            window.player = player;
+            window.dash = dash;
+        });
+    </script>
+</body>
+
+</html>

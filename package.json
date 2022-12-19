@@ -1,0 +1,22 @@
+{
+  "name": "youtube-server",
+  "version": "1.0.0",
+  "description": "A experiment to understand how MPD files work and understand how YouTube backend works when it comes to streaming video / audio files.",
+  "main": "index.js",
+  "scripts": {
+    "start-dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors-anywhere": "^0.4.4",
+    "express": "^4.18.2",
+    "https-proxy-agent": "^5.0.1",
+    "node-fetch": "^2.6.7",
+    "random-useragent": "^0.5.0",
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
